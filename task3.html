@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Card App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+    }
+    input {
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      background: white;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Contact Card App</h1>
+
+  <form id="contact-form">
+    <input type="text" id="name" placeholder="Name" required />
+    <input type="tel" id="phone" placeholder="Phone Number" required />
+    <input type="email" id="email" placeholder="Email" required />
+    <button type="submit">Add Contact</button>
+  </form>
+
+  <ul id="contact-list"></ul>
+
+  <script>
+    const form = document.getElementById('contact-form');
+    const contactList = document.getElementById('contact-list');
+    const contacts = [];
+
+    function displayContacts() {
+      contactList.innerHTML = '';
+      contacts.forEach((c, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${c.name} - ${c.phone} - ${c.email}`;
+        contactList.appendChild(li);
+      });
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+
+      if (name && phone && email) {
+        contacts.push({ name, phone, email });
+        displayContacts();
+        form.reset();
+      }
+    });
+  </script>
+
+</body>
+</html>
